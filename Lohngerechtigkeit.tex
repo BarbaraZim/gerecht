@@ -1,0 +1,1173 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fullpage}
+\renewcommand{\baselinestretch}{1.1}
+
+% Sprache
+\usepackage[ngerman]{babel}
+%\usepackage[babel,german=quotes]{csquotes}
+
+% Links
+\usepackage[hidelinks]{hyperref}
+\urlstyle{rm}
+
+% Bibliographie
+\usepackage[longnamesfirst]{natbib}
+\bibpunct[:]{(}{)}{;}{a}{}{,}
+\setlength{\bibsep}{0.0pt}
+%\usepackage[style=authoryear-comp,natbib=true,url=false,isbn=false,doi=false]{biblatex}
+%\addbibresource{bib.bib}
+
+% Tabellen
+\usepackage{tabularx,booktabs,dcolumn,ragged2e}
+\usepackage[figuresright]{rotating}
+\let\belowcaptionskip=\abovecaptionskip
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{x}{>{\RaggedRight\arraybackslash\hspace{0pt}}X}
+\newcolumntype{z}{>{\Centering\arraybackslash\hspace{0pt}}X}
+\newcolumntype{H}[1]{>{\RaggedRight\arraybackslash\hangindent1em\hspace{0pt}}p{#1}}
+\newcommand{\armultirow}[3]{%
+    \multicolumn{#1}{#2}{\begin{picture}(0,0)\put(0,0){%
+    \begin{tabular}[t]{@{}#2@{}}#3\end{tabular}}\end{picture}}}
+\makeatletter\let\expandableinput\@@input\makeatother % https://tex.stackexchange.com/questions/144625/misplaced-noalign-error-in-table-but-only-when-using-include
+
+% Graphiken
+\usepackage{graphicx}
+%\usepackage{tikz}
+%\usetikzlibrary{arrows}
+
+% Kommentare
+\usepackage{xcolor}
+\newif\ifcomments
+\commentsfalse
+\commentstrue % auskommentieren, um die Kommentare zu unterdrücken
+\newcommand{\comment}[1]{%
+    \ifcomments\marginpar{\renewcommand{\baselinestretch}{1}\tiny\hspace*{-1.1em}\colorbox{gray!20}%
+    {\textcolor{red}{\parbox[t]{.9in}{\raggedright #1}}}}\fi}
+\newcommand{\alert}[1]{\ifcomments\textcolor{red}{#1}\else#1\fi}
+
+
+% Encoding/Schrift
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Satz
+\pagestyle{plain}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\sloppy
+
+% Inhalt
+\begin{document}
+
+% Titlepage
+\title{Gerechte Löhne für Frauen und Männer. Ergebnisse von drei Experimenten}
+\author{Ben Jann, Barbara Zimmermann und Andreas Diekmann}
+\date{\today}
+\maketitle
+
+% Inhaltsverzeichnis
+\tableofcontents
+
+\newpage
+\begin{abstract}
+    \comment{Deutschen Abstract hinzufügen ...}
+    
+    %Just wages for men and women. Findings from three Experiments (Abstract)
+    The gender pay gap in Switzerland slightly diminished during the last two
+    decades, but the gap is still substantial. In 2014, women earned about 18\%
+    less than men in a full time job in the private sector. \comment{Zahlen aktualisieren?}
+    About 40\% of this gap cannot be explained
+    by differences in relevant factors such as human capital or economic
+    sectors and it remains unclear whether the unexplained gender wage gap is
+    due to discrimination or whether the applied statistical models are simply
+    not accurate enough. To shed light on the gender wage gap from a different
+    viewpoint we used an alternative approach and conducted three factorial
+    survey experiments to determine whether there is a “just wage gap” between
+    men and women. The results from the first experiment provide evidence for a
+    gender-based double standard in assessing incomes: Test persons judged
+    lower earnings for women as just. That is, according to these judgments,
+    women should indeed earn less than men. The findings from the second
+    experiment stand in contrast these results: Employing a similar design, no
+    gender differences in just earnings could be found. A reason for the
+    disagreement might be that the specified household context was not held
+    constant across experiments. We therefore conducted a third experiment in
+    which we systematically varied whether the described persons were single or
+    married. The results indicate that the family context is indeed an
+    important mediator. No gender gap could be found for singles, but higher
+    earnings were judged as fair for married men than for married women. That
+    is, according to the opinions of the respondents, 
+    there seems to be a “marriage premium” for men.
+\end{abstract}
+
+\newpage
+% Einleitung
+\section{Einleitung}
+
+\comment{Hinweis auf Heiratsrecht bis 1988: “Note that this arrangement was enshrined 
+in Switzerland’s marriage law until 1988, giving husbands the status as legal 
+head of family from whom wives needed the consent in order to take on paid employment.” 
+(Paper von Benita und Oli Oesch im ESR; das paper sollte irgendwo zitiert werden)}
+
+\comment{cite „Oesch:2017“ somewhere; see bibtex file}
+
+\comment{OK, beide Artikel zitiert.}
+
+Gemäss dem letzten Bericht des Bundesamts für Statistik verdienten Frauen im
+Jahr 2016 im Schweizer Privatsektor im Durchschnitt 19.6\% weniger als Männer
+(gemessen an auf ein 100\%-Pensum standardisierten Löhnen) \comment{Zahlen aktualisieren? -> Zahlen aktualisiert.}
+\citep{BFS-2019a}. Zum Vergleich: Als das Bundesamt für Statistik die
+Lohnungleichheit 1998 zum ersten Mal anhand der Lohnstrukturerhebung (LSE)
+untersuchen liess, betrug die Differenz fast 25\% \citep{Strub-etal-2006}. Der
+Unterschied hat sich also über die Jahre verkleinert, ist jedoch immer noch
+beachtlich (für eine Analyse im Zeitverlauf siehe z.B. \citealp{Schmid-2016}).
+
+Wieso hält sich der geschlechtsspezifische Lohnunterschied so hartnäckig?
+Ansätze zur Erklärung des Gender-Pay-Gap sind vielfältig und kommen aus der
+Ökonomie, Soziologie und vermehrt auch aus der Sozialpsychologie (für eine
+Übersicht siehe \citealp{Blau-Kahn-2017} oder
+\citealp{Weichselbaumer-Winter-Ebmer-2005}). Nachfolgend fassen wir die
+wichtigsten Argumente und Ergebnisse zusammen.
+\comment{Die nachfolgenden Ausführungen stark verdichten; max 2-3 Seiten}
+
+%\subsection{Lohnungleichheit aus ökonomischer und soziologischer Perspektive}
+
+Die vermutlich längste Tradition zur Erklärung von Lohnungleichheiten haben die
+ökonomischen Theorien, insbesondere die Humankapitaltheorie \citep{Becker-1975,
+Mincer-1958,Mincer-Polachek-1974}. Das Humankapital bezeichnet die Akkumulation
+von Fähigkeiten, Erfahrungen und Bildungsabschlüssen, die ein Individuum
+besitzt und die sich -- zumindest gemäss Theorie -- positiv auf seine
+Produktivität auswirken. Demnach werden Lohnungleichheiten damit erklärt, dass
+sich Menschen in ihrem Humankapital und folglich in ihrer Produktivität
+unterscheiden. 
+Insgesamt hat sich das Bildungsniveau zwischen Frauen und Männern über die letzten Jahrzehnte angeglichen. 28\% der 25-64-jährigen Frauen haben einen Hochschulabschluss. Bei den Männern sind es knapp 30\%. Bei den 25-34-jährigen haben mit 42\% inzwischen deutlich mehr Frauen als Männer (35\%) einen Hochschulabschluss \citep{BFS-2019b}. 
+
+Frauen arbeiten häufiger Teilzeit und haben aufgrund von familiären Verpflichtungen mehr Erwerbsunterbrechungen, was ihre Möglichkeiten, Arbeitserfahrung zu sammeln, beeinträchtigt. Dies resultiert in einer reduzierten Humankapitalausstattung und somit in Lohneinbussen. 
+
+Die Theorie geht noch einen Schritt weiter: Da Frauen eine eher
+diskontinuierliche Erwerbslaufbahn antizipieren, treffen sie entsprechende
+Bildungsentscheidungen und wählen zum Beispiel Berufe, in denen die
+Vereinbarkeit von Arbeit und Familie einfacher möglich ist oder in denen
+Erwerbsunterbrüche mit einer geringen Entwertung des Humankapitals einhergehen
+\citep{Polachek-1981}.
+
+Diese ungleiche Verteilung der Geschlechter auf Berufe und Tätigkeiten -- horizontale Segregation genannt -- ist in der Schweiz sehr ausgeprägt und hat sich über die Zeit nur wenig verändert \citep{Buchmann-Kriesi-2012,Charles-2005,Schwiter-etal-2014}.
+Gemäss der sogenannten „Devaluations-Hypothese“
+\citep{England-etal-1988,Liebeskind-2004} wird von Frauen ausgeübte Arbeit
+gesellschaftlich weniger hoch bewertet als typisch männlich konnotierte Arbeit. Die
+Abwertung erfolgt zum Beispiel dadurch, dass Qualifikationen, welche für die
+häufig von Frauen ausgeübten Berufe erforderlich sind, nicht also solche
+wahrgenommen, sondern als inhärent angesehen werden. Folglich schlagen sich
+diese Qualifikationen auch nicht in einem höheren Lohn nieder
+\citep{England-1992,England-2005,Gottschall-1995}. Die geschlechtsspezifische
+Prägung eines Berufes kann sich über die Zeit ändern, und tatsächlich gibt es
+Forschung, die einen negativen Zusammenhang zwischen der Feminisierung
+(verstanden als Zunahme des Frauenanteils) eines Berufs und dessen
+durchschnittlichem Einkommen findet (z.B.
+\citealp{Levanon-etal-2009,Murphy-Oesch-2016}).
+
+Die bessere Ausbildung und die Zunahme der Erwerbstätigkeit haben einen Beitrag
+zur Verminderung der Lohnungleichheit zwischen Frauen und Männern geleistet
+(siehe auch \citealp{Jann-Engelhardt-2008}). Der Umstand, dass Frauen weiterhin
+öfter in tieferen Pensen Teilzeit arbeiten und für einen Grossteil der
+unbezahlten Haus- und Familienarbeit zuständig sind, verhindert jedoch ihre
+gleichwertige Arbeitsmarktteilnahme. Während die geschlechtsspezifische
+Rolleinteilung besonders in der neoklassischen Ökonomie als rationale
+Kosten-Nutzen-Überlegung dargestellt wird („Spezialisierungs-Hypothese“,
+\citealp{Becker-1981}), kritisieren SoziologInnen dies als strukturelles
+Problem. Die „doppelte Vergesellschaftung“ \citep{Becker-Schmidt-2008}, ein
+Produkt der Industrialisierung, bezeichnet eine doppelte Einbindung der Frauen
+in das Sozialgefüge, einerseits auf dem Arbeitsmarkt und andererseits im
+Haushalt. Die daraus resultierende doppelte Belastung ist nicht zum Nutzen der
+Frauen. Daneben, dass der Haus- und Familienarbeit wenig Wert zugesprochen
+wird, verhindert sie auch die gleichwertige Integration in den Arbeitsmarkt.
+
+\cite{Oesch:2017} zeigen anhand von Paneldaten, dass Frauen starke Lohneinbussen erfahren, sobald sie Kinder haben, wovon ein grosser Teil mit der Reduktion der Arbeitszeit erklärt werden kann. Allerdings bleibt ein Anteil von bis zu 9\% des Lohnunterschieds zwischen Müttern und kinderlosen Frauen unerklärt. Mit einem zusätzlichen Vignetten-Experiment bei Personalverantwortlichen, zeigen die Autoren, dass Müttern im Vergleich zu ansonsten vergleichbaren Frauen ohne Kinder auch ein tieferer Lohn zugesprochen wird und diese seltener angestellt würden. 
+
+Die tieferen Frauenlöhne lassen sich allerdings nicht allein mit diesem sogenannten „motherhood penalty“  \citep{Budig-2001} erklären. In ihrer neuen Studie, finden \cite{Combet-2019} Lohnunterschiede zwischen Frauen und Männern lange bevor diese eine Familie gründen und beginnen, sich die Hausarbeit ungleich aufzuteilen. Dabei bleibt ein unerklärter Unterschied vorhanden, auch wenn eine Vielfalt von möglichen Einflussfaktoren, darunter Humankapital, Job-Charakterisitka und Werte in Bezug auf Arbeit und Familie kontrolliert werden. 
+
+Ein Teil des Lohnunterschieds erklärt sich weiterhin dadurch, dass Frauen
+seltener in Führungspositionen gelangen als Männer. In der Schweiz betrug der
+Frauenanteil unter den ArbeitnehmerInnen mit einer Führungsfunktion oder in
+einer Unternehmensleitung im Jahr 2018 36\% \citep{BFS-2019c}. In den
+Geschäftsleitungen der 100 grössten Schweizer Firmen befanden sich im selben
+Jahr nur 7\% Frauen. In Verwaltungsräten betrug ihr Anteil immerhin 19\%
+\citep{Schillingreport-2018}. Dabei ist unklar, ob es einfach eine Frage der
+Zeit ist, bis sich die noch jungen Bildungserfolge der Frauen in entsprechenden
+Positionen auf dem Arbeitsmarkt niederschlagen, oder ob weiterhin unsichtbare
+Barrieren vorhanden sind, die Frauen am Aufstieg hindern (eine so genannte
+„gläserne Decke“). Forschende, die diesen Ansatz verfolgen, erklären das
+Vorhandensein der gläsernen Decke unter anderem mit dem Einfluss sozialer
+Netzwerke, von denen Männer mehr profitieren (für die Schweiz siehe z.B.
+\citealp{Rost-2010}), oder mit Homophilie, bzw. homosozialer Reproduktion, also
+der Präferenz von ManagerInnen (wobei es eher Manager sind), ihresgleichen zu
+fördern (siehe z.B. \citealp{Bihagen-Ohls-2006,Holst-Wiemer-2010,Ochsenfeld-2012}). Frauen erzielen
+also tiefere Löhne, weil sie seltener Führungspositionen innehaben.
+Gleichzeitig ist allerdings der Lohnunterschied zwischen den Geschlechtern auf
+den oberen Hierarchiestufen grösser als auf den tieferen Stufen
+(\citealp{Blau-Kahn-2016}, \citealp[42]{Strub-Bannwart-2017}).
+
+
+\comment{diesen Abschnitt weglassen? Ist für unsere Exp. nicht relevant.}
+Die Entlohnung von Tätigkeiten bemisst sich nicht nur daran, welche Fähigkeiten
+zu ihrer Ausübung nötig sind, sondern auch an den Arbeitsbedingungen (z.B. wie
+interessant, anstrengend oder gefährlich eine Tätigkeit ist). Dieser
+theoretische Ansatz, „compensating differentials“ genannt
+\citep{Kilbourne-etal-1994}, besagt, dass ein Teil des Lohnunterschieds
+zwischen Frauen und Männern darauf zurückgeführt werden kann, dass Männer
+unangenehmere Jobs ausüben und deshalb höher entlöhnt würden. Überzeugende
+Evidenz, dass die „compensating differentials“ einen substanziellen Teil der
+geschlechtsspezifischen Lohndifferenz erklären, gibt es allerdings kaum.
+\comment{vgl.
+Goldin, 2014, im Zusammenhang mit zeitlicher Flexibilität --> Goldin bewegt sich da auf sehr dünnem Eis (Kommentare in ihrem Artikel}
+\comment{Stimmt die Behauptung im letzten Satz? --> ich finde jedenfalls nur Artikel, die diese These widerlegen, aber keine die sie bestätigen, z.B. McCrate 2005, Kilbourne et al 1994 oder Palme \& Wright 2006 (nicht online)}
+
+\section{Bisherige Literatur und theoretische Argumente}
+
+Trotz umfassenden statistischen Modellen, welche die oben ausgeführten Erklärungsfaktoren berücksichtigen, verbleibt ein unerklärter Lohnunterschied zwischen Frauen und Männern. Dieser betrug im Zeitraum zwischen 1998 und 2016 im Durchschnitt ca. 40\% des Gesamtunterschieds \citep{BFS-2019a,Strub-2010}. Ein Trend in die eine oder andere Richtung ist nicht auszumachen. Dabei wird kontrovers debattiert ob dieser unerklärte Anteil nun durch Diskriminierung oder wegen ungenau spezifizierten statistischen Modellen zustande kommt.
+
+\subsection{Diskriminierung}
+
+Theoretische Überlegungen sprechen durchaus dafür, dass Diskriminierungen zumindest nicht auszuschliessen sind. Die meistbeachteten theoretischen Ansätze basieren auf Gary
+Beckers „Economics of Discrimination“ \citep{Becker-1973}. \comment{überarbeiten!}Unter Annahme
+rationalen Verhaltens der Akteure erfolgt Diskriminierung aufgrund von
+Vorurteilen gegenüber bestimmten Gruppen („taste-based discrimination“). Ein
+zentrales Argument ist, dass beispielsweise Frauen oder Schwarze deswegen
+diskriminiert werden, weil dem/der ArbeitgeberIn sonst Nachteile erwachsen
+würden, zum Beispiel durch ein schlechteres Betriebsklima, Umsatzeinbussen oder
+den Verlust von KundInnen. Die Antizipierung dieser möglichen Nachteile kann
+dazu führen, dass diese kompensiert werden, indem Frauen weniger Lohn erhalten,
+in bestimmten Positionen nicht angestellt werden oder indem ihnen in gewissen
+Positionen weniger Aufstiegschancen gewährt werden.
+
+Das Konzept der „statistischen Diskriminierung“ \citep{Phelps-1972} versucht
+die unterschiedliche Behandlung von Frauen und Männern dahingehend zu erklären,
+dass sich Akteure wegen mangelnder Informationen bei der Festlegung des Lohns
+an statistischen Gruppenmerkmalen orientieren. Diese Theorie kann
+Lohnungleichheiten zwischen den Geschlechtern im Prinzip nur erklären, wenn
+sich die Produktivität der beiden Geschlechter unterscheidet. Soziologische und
+sozialpsychologische Studien zeigen allerdings, dass diese These nicht haltbar
+ist (z.B. \citealp{Bielby-Bielby-1988}). Im Gegenteil, auch wenn Frauen in
+Job-Evaluationen bessere Bewertungen erhalten, sind es die Männer, welche dann
+trotzdem eher befördert werden \citep{Blau-DeVaro-2007} oder grössere
+Lohnerhöhungen erhalten \citep{Castilla-2012}. Interessant ist das Konzept der 
+statistischen Diskrimierung jedoch, weil die herangezogenen Gruppenbewertungen auch auf 
+Stereotypen beruhen können, die nicht der Wahrheit 
+entsprechen, und sich solche Stereotype aufgrund selbstverstärkender Prozesse 
+verfestigen (und unter Umständen im Sinne einer selbsterfüllenden Prophezeiung 
+sogar bewahrheiten) können.
+
+\comment{diesen Abschnitt weglassen, da für unsere Exp. nicht relevant(?)}
+Was die neoklassischen Ansätze der Arbeitsmarktforschung weitgehend ausser Acht
+lassen, ist der Umstand, dass auf dem Arbeitsmarkt nicht alle Akteure zwingend
+gleich viel Macht besitzen und infolgedessen einen unterschiedlich grossen
+Handlungsspielraum haben \citep[40]{Abraham-Hinz-2005}. In diese Richtung geht
+zum Beispiel der Ansatz der monopsonistischen Diskriminierung: Demnach ist das
+Arbeitsangebot von Frauen weniger lohnelastisch, was Unternehmen mehr
+Verhandlungsmacht gibt, womit sie Frauen tiefere Löhne bezahlen können. Gründe
+für die Geschlechterunterschiede in der Lohnelastizität sind, dass Frauen (z.B.
+aufgrund von familiären Verpflichtungen) weniger mobil und eher auf
+Teilzeitarbeit angewiesen sind, oder dass die Job-Auswahl für sie kleiner ist,
+da sie sich auf weniger Berufe konzentrieren (z.B.
+\citealp{Hirsch-etal-2010,Webber-2016}).
+
+Schliesslich haben gemäss der „status construction theory“
+\citep{Ridgeway-1997,Ridgeway-2001} bereits existierende Status- und
+Ressourcenunterschiede zwischen verschiedenen sozialen Gruppen (insb. zwischen
+Frauen und Männern) Auswirkungen auf die Interaktionen zwischen den Individuen
+dieser Gruppen. Dabei entstehen sogenannte „status beliefs“, also Glaubenssätze
+über den Status der Mitglieder der jeweiligen Gruppen, welche in Interaktionen
+laufend reproduziert werden (vgl. \citealp{Goffman-1977}). Diese Glaubenssätze
+über den sozialen Status von Frauen und Männern haben zur Folge, dass Frauen
+weniger kompetent eingeschätzt werden und ihnen ein tieferer Status
+zugesprochen wird, was ungleiche Behandlung zum Beispiel auf dem Arbeitsmarkt
+zur Folge hat \citep{Ridgeway-1997}. Es ist also eine Art ein Teufelskreis:
+Weil Männer öfter in höheren Positionen sind, wird ihnen ein gesellschaftlich
+höherer Status zugeschrieben, was es wiederum als legitim erscheinen lässt,
+dass sie höhere Positionen oder höhere Einkommen erhalten (siehe dazu auch
+\citealp{Berger-etal-1972}).
+
+\subsection{Verteilungsgerechtigkeit} \comment{diesen Abschnitt auch kürzen (und schärfen)}
+
+\comment{statistische D. hat viel mit Vorstellungen zu tun; ähnliche Hinweise
+bei Literatur zur Abwertung von Frauenberufen; oder auch die Theorien zur
+Spezialisierung aufgrund von Rollen}
+
+Diese in den vorangehenden Abschnitten beschriebenen Theorien und empirischen
+Studien, versuchen zu erklären, warum Lohnunterschiede zwischen Frauen und
+Männern existieren, obwohl diese in einer offenen und auf meritokratischen
+Prinzipien basierenden Gesellschaft, gar nicht existieren sollten und gemäss
+Gesetz auch nicht existieren dürften. Diesen Widerspruch zwischen den
+bestehenden und bisher nur teilweise erklärten Lohnunterschieden und dem
+Anspruch einer modernen Gesellschaft auf Chancengleichheit werden wir nun etwas
+genauer betrachten. Dabei rücken die Prinzipien der Verteilungsgerechtigkeit in
+den Fokus. Wann wird die Verteilung von knappen Ressourcen, bspw. von
+Einkommen, als gerecht beurteilt und welche Kriterien kommen dabei zur
+Anwendung? Ist es gerecht, dass ein persönliches Merkmal, wie das Geschlecht
+einen Einfluss darauf hat, wie viel eine Person von einem bestimmten Gut
+erhält? Oder sollen alle gleich viel erhalten?
+
+Bereits in der Philosophie der Antike wurden Fragen zur
+Verteilungsgerechtigkeit diskutiert. Dabei haben sich mehrere, sich teilweise
+widersprechende Kriterien etabliert. Die drei bekanntesten Kriterien sind
+Gleichheit, Verdienst und Bedürftigkeit (vgl. z.B.
+\citealp{Deutsch-1975,Miller-1992,Sabbagh-2001}). Gleichheit bedeutet „für alle
+gleich viel“, ohne irgendwelche Charakteristiken der Personen zu
+berücksichtigen. Die Wichtigkeit des Kriteriums basiert u.a. auf den Werken von
+David Hume und kommt heute vor allem im Recht zur Anwendung (gleiche Rechte für
+alle). Für die Einkommensgerechtigkeit spielt es zumindest in der
+kapitalistischen Marktwirtschaft eine untergeordnete Rolle.
+
+Dass „allen das Gleiche“ nicht immer gerecht ist, erkannte bereits Aristoteles.
+Sein in der „nikomachischen Ethik“ eingeführtes Gerechtigkeitsprinzip basiert
+auf einer „proportionalen Gleichheit“. Für ihn muss „eine gewisse Würdigkeit
+das Richtmass der distributiven Gerechtigkeit sein“
+\citep[107]{Aristoteles-1985}. Worin diese Würdigkeit nun besteht, lässt er
+weitgehend offen. In der philosophischen Literatur wird dieses Prinzip nun
+meist „Verdienst-Prinzip“ genannt und kann verschiedene Aspekte von Verdienst
+oder Leistung enthalten, zum Beispiel Anstrengung, Fähigkeiten oder Erfolg.
+Welche dieser Kriterien wieviel zählen sollen, darüber herrscht keine Einigkeit
+\citep{Lamont-1994}.
+
+Das dritte Prinzip ist das der „Bedürftigkeit“. Demnach sollen diejenigen mehr
+von etwas bekommen, die einen höheren Bedarf danach haben. Dieses Prinzip hat
+seine Bedeutung heute hauptsächlich im Zusammenhang mit sozialstaatlichen
+Massnahmen. So gibt es Leistungen, wie beispielsweise die Sozialhilfe oder die
+Ergänzungsleistungen, welche an die Bedürftigkeit der EmpfängerInnen geknüpft
+sind. Die Leistungen der Altersvorsorge hingegen (insbesondere die 2. Säule)
+basieren eher auf dem Verdienst-Prinzip und werden (unter gewissen
+ausgleichenden Mechanismen, v.a. in der 1. Säule) gemäss den durch
+Erwerbsarbeit erwirtschafteten Vorsorgeguthaben verteilt.
+
+Dass askriptive Merkmale wie Geschlecht, soziale Herkunft, ethnische
+Zugehörigkeit oder sexuelle Orientierung in zeitgenössischen Theorien zur
+Verteilungsgerechtigkeit nicht vorkommen und bei der Beurteilung eines
+gerechten Einkommens keine Rolle spielen sollten, ist kein Zufall.
+\comment{(ggfs. Begründung mit Rawls, „Schleier des Nichtwissens“ oder so;
+Rawls 1979)} Demzufolge können Lohnunterschiede zwischen Frauen und
+Männern erst einmal nicht gerecht sein, ausser es werden Gründe gefunden,
+wonach Frauen entweder weniger verdienen oder weniger benötigen als Männer. In
+Übereinstimmung mit der Humankaptialtheorie
+\citep{Becker-1975,Mincer-Polachek-1974} soll eine höhere Produktivität zu
+einem höheren Einkommen führen. Damit also Frauen gerechterweise weniger
+verdienen als Männer, müsste ihre Produktivität tiefer sein. Dies wurde in
+einer Vielzahl empirischer Studien untersucht und konnte nicht belegt werden.
+Bei gleichen Voraussetzungen weisen Frauen die gleiche Produktivität auf wie
+Männer.
+
+Auch in Bezug auf das zweite Gerechtigkeitskriterium, Bedürftigkeit, leuchtet
+es nicht auf Anhieb ein, wieso Frauen weniger verdienen sollten. Oder führen
+sie etwa einen bescheideneren Lebensstil als Männer? Das häufigste Argument
+diesbezüglich ist, dass verheiratete Frauen auf das Einkommen ihres Mannes
+zählen können und deshalb weniger darauf angewiesen sind, ein gleichwertiges
+Einkommen zu generieren. Diese Überlegungen basieren auf der
+geschlechtsspezifischen Rollenteilung, welche dem Mann die Erwerbsarbeit
+zuweist und die Frau für die Hausarbeit und Kindererziehung vorsieht. Auch wenn
+sich in den letzten Jahrzehnten diesbezüglich viel verändert hat, die
+Grundfesten wurden nicht erschüttert.
+\comment{Hier evtl. etwas ergänzen.}
+
+\subsection{Empirische Gerechtigkeitsforschung}
+
+Um herauszufinden, wie die Leute denken und welche Kriterien ihnen bei
+Verteilungsfragen wichtig sind, wurden in der empirischen Sozialforschung in
+den letzten Jahren vermehrt Vignetten-Experimente (auch faktorieller Survey
+genannt) durchgeführt. Eingeführt wurde die Methode aber bereits früher durch
+Peter H. Rossi (vgl. \citealp{Rossi-1979,Rossi-Nock-1982}). Aufbauend auf den
+Pionierarbeiten im Bereich der Einkommensgerechtigkeit
+\citep{Jasso-1980,Jasso-Rossi-1977,Jasso-Webster-1997} wurden verschiedene
+Vignetten-Experimente durchgeführt, bspw. um den Einfluss von
+Gerechtigkeitsprinzipien zu untersuchen oder das Zustandekommen von
+Diskriminierungen besser zu verstehen (für einen Überblick siehe z.B.
+\citealp{Auspurg-etal-2017,Gatskova-2015}).
+
+\comment{Auspurg et al: gender-specific referents vs. gender status beliefs: gsr: Frauen vergleichen sich mit anderen Frauen und merken drum gar nicht, dass sie weniger kriegen als Männer. Konsequenterweise würden sie auch Männer tiefer bewerten als das die Männer selbst tun. Es dürfte also keinen just pay gap geben, nur unterschiedliche Bewertung je nach Geschlecht der Befragten.}
+
+\subsection{Unsere Studie}
+
+Wir knüpfen mit unserer Studie an diese Literatur an. Um zu untersuchen, welche
+Ursachen der mit statistischen Daten nicht erklärbare Teil des Lohnunterschieds
+zwischen Männern und Frauen haben könnte, haben wir im Zeitraum zwischen 2001
+und 2010 drei verschiedene und aufeinander aufbauende Vignetten-Experimente
+durchgeführt. Diese werden in den folgenden Abschnitten im Detail beschrieben.
+
+
+\dots
+\comment{hier z.b. auf Auspurg et al. 2017 aufbauen}
+
+
+\section{Daten und Methode}
+
+Hier allgemeine sachen: 
+
+- 3 experimente mit faktoriellem survey
+
+- die verschiedenen Datenquellen
+
+- in allen drei designs: jeweils nur eine Vignette (wegen soz. Erwünschth.); Randomisierung der Faktoren (Experiment); (allgemeine Punkte)
+
+Umweltsurvey 2011: Einschränkung auf DS
+
+Übericht zu Fallzahlen etc.
+
+Da wir mit einem experimentellen Design arbeiten und es in erster Linie darum geht,
+die kausalen Strukturen aufzudecken, und die Generalisierung i.S. 
+repräsentative deskriptive Aussagen über die Population weniger im Vordergrund stehen, verzichten wir auf eine Gewichtung.
+Aus dem gleichen Grund verzichten wir auf eine Einschränkung der Stichprobe der dritten Studie auf die Deutschschweiz und 
+behalten die Fälle aus der französischen und italienischen Schweiz bei.
+
+Gewichten und Fälle ausschliessen reduziert die Effizienz und somit die Power der Studie...
+
+Die allgemeinen Zusammenhangsstruktur bleibt gleich ..., die Konfindenzintervalle werden aber etwas grösser (weniger Effizienz.)
+
+Die Spezifika der einzelnen Experimente werden bei der Vorstellung der Resultate besprochen...
+
+Teil zu Analysemethode: 
+\begin{itemize}
+    \item predictive margins from saturated models including all interactions among experiemntal factors; balances random 
+fluctuations and thus stabilizes statistical analysis (more power); anaylses based on plain mean differences are in online supplement 
+    \item details of Willingness-to-pay analysis (Umrechnung zu Franken)
+    \item evtl. Resultate auch noch mit „randomization inference“ replizieren
+\end{itemize}
+
+
+\section{Resultate}
+
+\subsection{Experiment 1}
+\comment{Teile der Beschreibung der Daten könnten in den Abschnitt „Daten und Methode“}
+
+In diesem Experiment untersuchen wir erstens, ob Diskriminierung für
+Lohnunterschiede zwischen Frauen und Männern verantwortlich sein könnte.
+Zweitens interessiert uns, ob Prinzipien der Verteilungsgerechtigkeit bei der
+Beurteilung eines gerechten Lohns zur Anwendung kommen. Dank dem
+experimentellen Design können wir Diskriminierung von anderen Ursachen, wie
+bspw. unterschiedliches Humankapital isolieren, wir können jedoch nicht genau
+sagen, wie diese Diskriminierung zustande kommt.
+
+Die Daten stammen aus einer schriftliche Befragung zum Thema „Ungleichheit und
+Gerechtigkeit“, die 2001 am Institut für Soziologie der Universität Bern
+durchgeführt wurde. Befragt wurden Personen einer Zufallsstichprobe der
+deutschschweizerischen Wohnbevölkerung im Alter von mindestens 18
+Jahren.\footnote{Es handelte sich um eine einfache Wahrscheinlichkeitsauswahl
+von Haushalten aus dem Telefonverzeichnis. Pro Haushalts wurde je eine zu
+befragende Zielperson anhand der Geburtstagsmethode bestimmt.} Die
+Ausschöpfungsquote beträgt 34\% (531 gültige Interviews). Für detailliertere
+Informationen zu der Erhebung und den Daten siehe \citet{Jann-2001}.
+
+Die Befragung enthält eine Reihe von Fragen zu unterschiedlichen Aspekten von
+Ungleichheit und Gerechtigkeit. Enthalten ist zudem ein Vignetten-Experiment,
+welches darin besteht, eine Vignette -- also eine Beschreibung einer
+spezifischen Situation oder Aussage -- zu bewerten. Eine Beispielvignette aus
+der Befragung ist in Abbildung~\ref{fig-1} dargestellt. Variiert wurden die
+Faktoren \emph{Geschlecht}, \emph{Bedürftigkeit}, und \emph{Leistung}; siehe 
+Tabelle~\ref{tab-ex1-faktoren} zu Ausprägungen und Wortlaut der Variationen.
+Die anderen in der Vignette angesprochenen Merkmale (Alter, Beruf, Einkommen)
+wurden konstant gehalten.
+
+Aus der Variation der drei Faktoren mit je zwei Ausprägungen ergeben sich acht
+verschiedene Vignetten-Kombinationen, die den Befragten nach dem Zufallsprinzip
+zur Beurteilung zugewiesen wurden. Dadurch wird gewährleistet, dass die
+Faktoren der Vignetten nicht mit Eigenschaften der Befragten zusammenhängen und
+auch untereinander nicht korreliert sind. Die bivariaten Effekte der
+Vignetten-Faktoren auf die Bewertung können also abgesehen von
+Zufallsvariationen – und unter dem Vorbehalt, dass anders als in einem
+Laborexperiment nicht alle Rahmenbedingungen kontrolliert wurden – als
+kausal interpretiert werden (keine Scheinkorrelationen, die Einflüsse
+sämtlicher Drittvariablen sind neutralisiert).
+
+
+\begin{figure}\centering
+    \fbox{
+    \includegraphics[width=0.8\textwidth]{gr/vignette-2001}
+    }
+    \caption{Beispiel einer Vignette aus Experiment 1}\label{fig-1}
+\end{figure}
+
+
+\begin{table}
+    \small
+    \caption{Experimentelle Faktoren in Experiment 1}\label{tab-ex1-faktoren}
+    \begin{tabularx}{\textwidth}{@{}llX@{}}
+        \toprule
+        Faktor          & Ausprägung & Wortlaut       \\\midrule
+        Geschlecht      & männlich     & “Herr Meier”   \\
+                        & weiblich     & “Frau Meier”   \\
+        \addlinespace
+        Bedürftigkeit   & tief         & „Er/sie ist verheiratet in kinderloser Ehe. Finanzielle Sorgen kennt er/sie keine.“ \\
+                        & hoch         & „Er/sie ist alleinerziehender Vater/alleinerziehende Mutter von zwei Kindern. Finanziell kommt er/sie nur knapp über die Runden.“ \\
+        \addlinespace
+        Leistung        & tief         & „Sein/ihr berufliches Engagement lässt zu Wünschen übrig und die Anforderungen an seine/ihre Leistung erfüllt er/sie nur knapp“   \\
+                        & hoch         & „Er/sie arbeitet engagiert und seine/ihre Aufgaben und Pflichten erfüllt er/sie zur vollen Zufriedenheit seines/ihres Arbeitgebers“  \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+
+Um Effekten sozialer Erwünschtheit entgegen zu wirken, wurde jeder
+Befragungsperson nur eine Vignette zur Bewertung vorgelegt („between“ Design).
+Würden mehrere Vignetten mit variierenden Ausprägungen präsentiert, hätten die
+Befragten die Möglichkeit, die Alternativen zu vergleichen und die Bewertungen
+mit einem sozial erwünschten oder politisch korrekten Antwortverhalten
+abzustimmen. Liegt jedoch nur eine Vignette vor, so ist für die befragten
+Personen unklar, welche Merkmale variiert werden (bzw. dass überhaupt etwas
+variiert wird), und die abgegebenen Bewertungen werden nicht durch
+Vergleichsprozesse beeinflusst. Effekte der sozialen Erwünschtheit sollten so
+weitgehend ausgeschlossen werden können.
+
+Abbildung~\ref{fig-ex1} zeigt die durchschnittlichen Einkommensbewertungen in
+Abhängigkeit des Geschlechts der beschriebenen Person, im Total sowie
+aufgeschlüsselt nach Bedürftigkeit und Leistung (berichtet sind Regression-Adjustment-Resultate unter 
+Berücksichtigung sämtlicher Interaktionseffekte). Alle drei Kriterien --
+Geschlecht, Leistung und Bedürftigkeit -- scheinen bei der Beurteilung des
+Einkommens eine Rolle zu spielen. Zudem scheint der Effekt des Geschlechts
+relativ unabhängig zu sein vom Leistungs- und Bedürftigkeitsniveau.
+
+% Geschlecht
+
+Auf der Skala von --5 („viel zu niedrig“) bis 5 („viel zu hoch“) erhalten
+Frauen den Wert --0.61. Ihr durchschnittliches Vignetten-Einkommen wird somit
+als etwas zu niedrig eingestuft. Die durchschnittlichen Vignetten-Einkommen der
+Männer hingegen werden mit einem Wert von --1.49 deutlicher als zu niedrig
+einstuft. Das heisst, wenn es sonst keine Unterschiede gibt zwischen Frauen und
+Männern, wird für Frauen ein signifikant tieferes Einkommen als gerecht
+empfunden.
+
+\begin{figure}\centering
+    \includegraphics[scale=.9]{log/ex1}
+    \caption{Einkommensbewertungen nach Geschlecht der beschriebenen Person 
+    in Experiment 1 (Mittelwerte inkl. 95\%-Konfidenzintervalle)}\label{fig-ex1}
+\end{figure}
+
+% Leistung und Bedürftigkeit
+
+Das Einkommen von Personen, denen in den Vignetten eine hohe Leistung in Form
+von Engagement und Arbeitserfüllung zur Zufriedenheit des Arbeitgebers
+attestiert wurde, wird häufiger als zu tief eingestuft als dasjenige von
+Personen, deren Leistung zu wünschen übrig lässt. Die Mittelwertdifferenz (über
+beide Geschlechter) von 1.80 ist gross und signifikant ($p<0.001$). Leistung
+soll also belohnt werden. Ein ähnliches Bild zeigt sich bei der Bedürftigkeit.
+Diese wurde anhand von zwei unterschiedlichen Kriterien operationalisiert:
+Einerseits die familiäre Situation (alleinerziehend oder verheiratet ohne
+Kinder) und andererseits die effektiven finanziellen Bedürfnisse („kommt nur
+knapp über die Runden“ vs. „kennt keine finanziellen Sorgen“).
+Alleinerziehende, die sich in finanziell prekären Verhältnissen befinden sollen
+mehr verdienen als verheiratete ohne Kinder, die keine finanziellen Sorgen
+haben (Differenz über beide Geschlechter: 1.27, $p<0.001$). Dadurch, dass diese
+beiden Kriterien – Kinder und finanzielle Sorgen – nicht auch separat variiert
+wurden, kann allerdings nicht festgestellt werden, ob bei der Beurteilung eines
+von beiden wichtiger ist, ob beide die gleiche Rolle spielen, oder ob die
+Kombination von beiden ausschlaggebend ist. Ein Zusammenhang ist allerdings
+anzunehmen, denn es ist bekannt, dass die finanziellen Bedürfnisse von Familien
+mit Kindern höher sind als diejenigen von kinderlosen. Zudem sind
+Alleinerziehende überdurchschnittlich oft von Armut betroffen und auf
+Sozialhilfe angewiesen \citep{Amacker-etal-2015}. Zusammengefasst zeigen unsere
+Analysen, dass beide Kriterien der Verteilungsgerechtigkeit, also Leistung und
+Bedürftigkeit, bei der Beurteilung eines gerechten Einkommens relevant sind.
+
+% Interaktion Geschlecht & Leistung / Bedürftigkeit
+
+Als nächstes gehen wir der Frage nach, wie die verschiedenen Kriterien der
+Verteilungsgerechtigkeit mit dem askriptiven Merkmal Geschlecht in Verbindung
+gebracht werden können. Kann der Geschlechterunterschied mit einem der anderen
+Kriterien erklärt werden? In den Vignetten wurden Leistung, Bedürftigkeit und
+Geschlecht randomisiert. Das heisst, die Leistung und Bedürftigkeit der Frauen
+unterscheidet sich nicht systematisch von derjenigen der Männer. Somit ist der
+Geschlechterunterschied nicht auf ein unterschiedliches Leistungs- oder
+Bedürftigkeitsniveau zurückzuführen. Von Interesse ist jedoch auch die Frage,
+ob Leistung und Bedürftigkeit für beide Geschlechter gleich bewertet werden
+oder ob das Leistungs- und das Bedürftigkeitsprinzip bei den beiden
+Geschlechtern unterschiedlich zur Anwendung kommen. In Abbildung~\ref{fig-ex1}
+ist ersichtlich, dass Frauen und Männer bei gleicher Leistung unterschiedlich
+bewertet wurden (die Mittelwerte unterscheiden sich signifikant) und dass diese
+Differenz bei tiefer Leistung tendenziell etwas grösser ist als bei hoher. Bei
+Frauen ist der Wert bei tiefer Leistung positiv, was dahingehend zu
+interpretieren ist, dass ihr Einkommen im Schnitt als zu hoch beurteilt wurde.
+Bei Männern hingegen ist dies nicht der Fall. Ihr Einkommen wird auch bei
+tiefer Leistung als eher zu tief eingestuft. Es gibt also eine leichte Tendenz,
+Leistung von Frauen und Männern nicht gleich zu beurteilen. Allerdings sind die
+Unterschiede gering und die entsprechenden Differenzen nicht signifikant
+($p=0.46$). Wie sieht es bezüglich des Bedürftigkeitsprinzips aus? Auch wenn es
+sich bei der Bedürftigkeit um etwas komplett anderes handelt als bei der
+Leistung, fallen die Resultate vergleichbar aus. Besteht eine hohe
+Bedürftigkeit, wird das Vignetten-Einkommen der Männer signifikant deutlicher
+als zu tief bewertet als dasjenige der Frauen, welches ebenfalls als zu niedrig
+eingeschätzt wird. Alleinerziehende Männer in knappen finanziellen
+Verhältnissen sollen also mehr verdienen als vergleichbare alleinerziehende
+Frauen. Bei tiefer Bedürftigkeit, also bei Verheirateten ohne Kinder, wird das
+Einkommen der Frauen, im Gegenteil zu dem der Männer, als etwas zu hoch
+eingeschätzt (Abbildung~\ref{fig-ex1}). Die Differenz zwischen verheirateten
+Frauen und Männern ist etwas grösser als diejenige zwischen Alleinstehenden.
+Erklären lässt sich eine solche Differenz mit der in unserer Gesellschaft
+weiterhin vorherrschenden geschlechtsspezifischen Rollenteilung, bei der Männer
+mehr zum Haushaltseinkommen beitragen und Frauen sich hauptsächlich um den
+Haushalt und die Kinder kümmern, woraus ein höherer Einkommensbedarf des Mannes
+abgeleitet werden kann. Die Differenz befindet sich jedoch in einer ähnlichen
+Grössenordnung wie bei der Leistung und ist ebenfalls nicht signifikant
+($p=0.35$).
+
+In Abbildung~\ref{fig-ex1} ist weiterhin der Einfluss des \emph{Geschlecht der
+Versuchsperson} dargestellt. Im Total ist der Effekt des Geschlechts der
+Versuchsperson ist fast null und nicht signifikant ($p=0.71$), was bedeutet,
+dass Frauen und Männer die Vignetten gesamthaft nicht verschieden beurteilten.
+Es könnte jedoch sein, dass jeweils das eigene Geschlecht bevorzugt wird.
+Deshalb ist in der Abbildung der Effekt des Vignettengeschlechts getrennt nach
+Geschlecht der Versuchsperson ausgewiesen. Die männlichen Versuchspersonen
+haben tendenziell einen etwas grösseren Unterschied zwischen Frauen und Männern
+gemacht als die weiblichen Versuchspersonen, die Differenz ist aber nicht
+statistisch signifikant ($p=0.28$). Tatsächlich ist es so, dass auch Frauen
+den Männern in den Vignetten ein höheres Einkommen zugestanden haben als den
+Frauen. Der Effekt des Geschlechts der Vignette ist für Männer ($p<0.001$) 
+wie auch für Frauen ($p<0.007$) signifikant.
+
+Die verschiedenen Analysen haben gezeigt, dass das Geschlecht der Vignette und
+die beiden Kriterien der Verteilungsgerechtigkeit -- Verdienst und
+Bedürftigkeit -- eine entscheidende Rolle spielen bei der Beurteilung, ob ein
+bestimmtes Einkommen als gerecht empfunden wird. Das Hauptresultat von
+Experiment~1 ist ohne Zweifel, dass Frauen unter sonst gleichen Umständen
+weniger Einkommen zugestanden wird als Männern -- und zwar von beiden
+Geschlechtern! Dieses Resultat ist überraschend, würde man in einer
+aufgeklärten und nach meritokratischen Prinzipien organisierten Gesellschaft
+doch erwarten, dass das Geschlecht bei der Einkommensbewertung keine Rolle
+spielt. Entgegen dieser Erwartung scheinen die Befragten die Situationen von
+Frauen und Männern jedoch -- zumindest unbewusst -- mit unterschiedlichen
+Massstäben bewerten.
+
+Das Experiment liefert allerdings keine Erklärung dafür, warum ein solcher
+Unterschied gemacht wird. Weiterhin weist das experimentelle Design eine
+Schwäche auf, indem beim Bedürftigkeitskriterium zwei unterschiedliche
+Dimensionen vermischt wurden. Es ist deshalb nicht möglich zu beurteilen, ob
+die familiäre oder eher die finanzielle Situation für die Versuchspersonen für den 
+Effekt des Bedürftigkeit entscheidend war.
+
+
+\subsection{Experiment 2}
+\comment{Teile der Beschreibung der Daten könnten in den Abschnitt „Daten und Methode“}
+\comment{Doku der Daten erstellen}
+
+In Experiment~2 versuchen wir die Ergebnisse von Experiment~1 in Bezug auf die
+Relevanz des Geschlechts zu replizieren. Um weitere mögliche Einflussfaktoren,
+die mit der familiären Situation zusammenhängen könnten, zu kontrollieren,
+halten wir in diesem Experiment den Zivilstand konstant. Alle
+Vignetten-Personen werden als alleinstehend und ohne Kinder beschrieben.
+Zweitens interessiert uns, ob die horizontale Segregation einen Einfluss auf
+die Einkommensbewertung hat. Die Datenerhebung fand im Rahmen einer Kurzbefragung zum
+Thema „Lohnniveau in der Schweiz“ statt und wurde im Jahr 2006 an der ETH
+Zürich durchgeführt. Es handelte sich dabei um eine postalische Befragung einer
+Zufallsstichprobe der deutschschweizerischen Wohnbevölkerung ($N = 371$,
+Rücklauf: 41.2\%). Die Vignetten bestanden aus einem $2 \times 2 \times 3 \times
+3$-Design mit den folgenden Faktoren (eine Beispielvignette findet sich in
+Abbildung~\ref{fig-2}): \comment{Tabelle zu Faktoren wie bei Experiment 1}
+\begin{itemize}
+\item Geschlecht: weiblich vs. männlich
+\item Nationalität: schweizerisch klingender Name („Herr/Frau Walter“) vs. ausländisch klingender Name („Herr/Frau Ismailovic“)
+\item Beruf: gemischt (Journalist/in), frauendominiert (Krankenpfleger/in), männerdominiert (Schreiner/in)
+\item Einkommen: drei Stufen im Abstand von je 500 CHF (Journalist/in: 5000, 5500, 6000; Krankenpfleger/in: 4000, 4500, 5000; 
+Schreiner/in: 4500, 5000, 5500)
+\end{itemize}
+
+\begin{figure}\centering
+    \fbox{
+    \includegraphics[width=0.9\textwidth]{gr/vignette-2006}
+    }
+    \caption{Beispiel einer Vignette aus Experiment 2}\label{fig-2}
+\end{figure}
+
+\noindent 
+Die Resultate des Experiments sind in Abbildung~\ref{fig-ex2}
+dargestellt (wiederum Regression-Adjustment-Resultate unter Berücksichtigung
+von Interaktionen). Da das Einkommen in der Vignette variiert wurde, lassen sich die 
+Ergebnisse auch zu Frankenbeträgen umrechnen; diese Resultate finden sich in 
+Abbildung~\ref{fig-ex2chf}. Im Gegensatz zu Experiment~1 spielt das Geschlecht bei der
+Bewertung der Einkommen in Experiment~2 keine Rolle. Das in der Vignette
+angegebene Einkommen wurde bei Frauen und Männern gleichermassen in
+Durchschnitt als etwas zu tief bewertet. Die befragten Personen haben also
+keine diskriminierenden Präferenzen gegenüber Frauen geäussert. Auch
+aufgeschlüsselt nach Berufen und nach Nationalität lassen sich keine
+substanziellen Unterschiede zwischen der Bewertung der weiblichen und der
+männlichen Vignette feststellen. Weiterhin hat auch das Geschlecht der
+Versuchsperson keinen Einfluss; das heisst, Frauen wie auch Männer haben keinen
+Unterschied gemacht zwischen der Bewertung der weiblichen und der männlichen
+Vignette.
+
+\begin{figure}\centering
+    \includegraphics[scale=.9]{log/ex2}
+    \caption{Einkommensbewertungen nach Geschlecht der beschriebenen Person in 
+    Experiment 2 (Mittelwerte inkl. 95\%-Konfidenzintervalle)}\label{fig-ex2}
+\end{figure}
+\begin{figure}\centering
+    \includegraphics[scale=.9]{log/ex2chf}
+    \caption{Einkommensbewertungen in CHF nach Geschlecht der beschriebenen Person in 
+    Experiment 2 (Mittelwerte inkl. 95\%-Konfidenzintervalle)}\label{fig-ex2chf}
+\end{figure}
+
+
+In Experiment~2 finden wir also überraschenderweise keinen geschlechtsspezifischen
+Unterschied bei der Einkommensbewertung der Vignetten, obwohl das
+Studien-Design sehr ähnlich war wie das von Experiment~1. Wie lässt sich diese
+Diskrepanz erklären? In beiden Studie wurde eine repräsentative
+Zufallsstichprobe der Deutschschweiz befragt, womit wir ausschliessen können,
+dass es sich um Resultate für grundsätzlich verschiedene Populationen handelt.
+Auch gehen wir nicht davon aus, dass den unterschiedlichen Ergebnissen
+fundamentale Veränderungen in den Einstellungen zu Geschlechtergerechtigkeit
+zugrunde liegen; dafür ist der Zeitraum von 2001 bis 2006 zu kurz.
+
+Allerdings könnte der Familienkontext in der Vignette eine Rolle gespielt
+haben. In Experiment~2 sind alle Frauen und Männer in den Vignetten
+alleinstehend und kinderlos. In Experiment~1 waren sie entweder alleinerziehend
+und in einer prekären finanziellen Situation oder kinderlos verheiratet und
+ohne finanzielle Sorgen.
+\comment{Das Resultat könnte aber auch
+    ein Artefakt sein aufgrund der Fragebogenkonstruktion: Bei Exp. 1 sollen die
+    Leute in der Frage vor der Vignette angeben, was lohnrelevant sein soll. Zur
+    Auswahl stehen Verdienst- und Bedürftigkeitskriterien. Bei Exp. 2 geht es in
+    den beiden Fragen vor der Vignette zuerst um die Rechtfertigung von
+    Managerlöhnen, im Vgl. zu denen Journi, Schreiner und Krankenschwester
+    natürlich alle wenig verdienen und dann wird nach dem angenommenen
+    Durchschnittseinkommen gefragt, was die Leute im Mittel auf 8'500.- schätzen,
+    also auch viel höher als alle Vignetten. Dass sich deshalb die
+    Geschlechterunterschiede aufheben ist jedoch längst nicht zwingend (v.a. weil
+    die Bewertung insgesamt nur als leicht und nicht viel zu tief ausfällt).}
+
+Unter Umständen liegt in diesem Designunterschied der Grund für die sich
+widersprechenden Ergebnisse. Falls dem so wäre, würde dies gleichzeitig
+Hinweise für die Erklärung des in Experiment~1 gefundenen Geschlechtereffekts
+liefern. So kann vermutet werden, dass bei der Bewertung des Einkommens die
+Befragten berücksichtigen, ob es Hinweise auf eine weitere Person gibt, die zum
+Haushaltseinkommen beiträgt. Ein Beitrag einer weiteren Person ist bei
+Verheirateten wie auch bei Alleinerziehenden (Alimente) wahrscheinlicher als
+bei Alleinstehenden. In Übereinstimmung mit den vorherrschenden
+Geschlechterrollen in der Gesellschaft gehen die Befragten von einem grösseren
+Beitrag aus, wenn diese weitere Person ein Mann ist. Das heisst, in Experiment~1 
+wird implizit eine zusätzliche Einkommenskomponente dazu gedacht, die sich je
+nach Geschlecht der Person in der Vignette unterscheidet. Wenn dies zutrifft,
+würden wir bei Experiment~1 einen Geschlechtereffekt erwarten, nicht jedoch bei
+Experiment~2. Um diese Hypothese zu testen, haben wir ein drittes Experiment
+durchgeführt.
+\comment{copy-paste aus deinen PPT von Luzern 2014}
+\comment{Wobei heutzutage bekommt man kaum mehr Alimente (aber das wissen die
+    Leute vielleicht nicht – wusste ich jedenfalls nicht, bis ich da im
+    Scheidungsprojekt mit Dorian gearbeitet habe)}
+
+
+\subsection{Experiment 3}
+\comment{Teile der Beschreibung der Daten könnten in den Abschnitt „Daten und Methode“}
+\comment{„Offizielle“ Version der Umweltsurveys verwenden}
+
+In unserem dritten Experiment wollen wir nun überprüfen, ob sich das
+Gerechtigkeitsprinzip der Bedürftigkeit im Zivilstand manifestiert und ob dies
+gemäss der Spezialisierungs-Hypothese nur für Männer oder auch für Frauen
+zutrifft.
+
+Experiment~3 wurde 2010 im Rahmen der zweiten Panelbefragung des Umweltsurveys
+2007 der ETH Zürich durchgeführt. Befragt wurden Personen einer repräsentativen
+Zufallsstichprobe der Schweiz. Von den 2'517 Personen der Bruttostichprobe
+(Teilnehmende der Erstbefragung) nahmen 1'945 Personen teil, was einem Rücklauf
+von 77.3\% entspricht (für weitere Informationen zur Datenerhebung siehe
+\citealp{Diekmann-etal-2012}). Wie in den vorangehenden beiden Befragungen
+wurden die Versuchspersonen u.a. gebeten, eine Vignette zu bewerten. Diese wurde
+auf den folgenden Dimensionen variiert (siehe Abbildung~\ref{fig-3} für eine Beispielvignette):
+\comment{Tabelle zu Faktoren wie bei Experiment 1}
+\begin{itemize}
+\item Geschlecht: weiblich vs. männlich
+\item Zivilstand: alleinstehend ohne Kinder vs. verheiratet ohne Kinder
+\item Leistung: durchschnittlich vs. überdurchschnittlich
+\item Einkommen: 5000 CHF, 5500 CHF, 6000 CHF
+\end{itemize}
+
+\begin{figure}\centering
+    \fbox{
+    \includegraphics[width=0.95\textwidth]{gr/vignette-2010}
+    }
+    \caption{Beispiel einer Vignette aus Experiment 3}\label{fig-3}
+\end{figure}
+
+Die Resultate des Experiments finden sich in Abbildung~\ref{fig-ex3} und –
+umgerechnet zu Frankenbeträgen – in Abbildung~\ref{fig-ex3chf}. Die drei in den
+Vignetten experimentell variierten Dimensionen -- Geschlecht, Leistung und
+Zivilstand -- unterscheiden sich in den Mittelwertsvergleichen jeweils
+signifikant. Im Mittel werden alle Einkommen als etwas zu hoch bewertet. Für
+Frauen wird, wie in Experiment~1, ein deutlich tieferes Einkommen als gerecht
+empfunden als für Männer ($p<0.001$; der Einkommensunterschied entspricht im
+Mittel etwa 280 Franken pro Monat). Erwartungsgemäss hat auch die Leistung
+einen grossen Einfluss auf die Bewertung des Vignetten-Einkommens. Bei tiefer
+Leistung wird das Einkommen deutlicher als zu hoch beurteilt ($p<0.001$; der
+Unterschied beträgt etwa 660 Franken). Weiterhin wird das Einkommen von
+Alleinstehenden eher als zu hoch beurteilt als dasjenige von Verheirateten
+($p=0.008$; im Schnitt ist der Unterschied etwa 170 Franken).
+
+In einem weiteren Schritt interessiert uns, ob der Geschlechtereffekt mit der
+Leistung und dem Zivilstand zusammenhängt. Zwischen dem Geschlecht und der
+Leistung finden wir -- übereinstimmend mit den Ergebnissen von Experiment~1 --
+keinen Interaktionseffekt. Das heisst, bei tiefer wie auch bei hoher Leistung
+wird das Einkommen der Männer weniger stark als zu hoch bewertet als das
+Einkommen der Frauen ($p=0.005$ bzw. $p=0.001$) bzw. Leistung wird bei beiden
+Geschlechtern ähnlich bewertet. Bezüglich des Zivilstands finden wir allerdings
+in Einklang mit unserer Hypothese einen signifikanten Interaktionseffekt. Der
+Effekt des Zivilstands hat also eine geschlechtsspezifische Komponente:
+Verheiratete Männer sollen gemäss den Befragten mehr verdienen als
+alleinstehende. Für Frauen gibt es jedoch keine solche „Heiratsprämie“. Anders
+formuliert machen die Befragten keinen Unterschied zwischen der männlichen und
+der weiblichen Vignette, wenn es sich um Alleinstehende handelt ($p=0.141$).
+Geht es jedoch um Verheiratete, wird den Männern ein höheres Einkommen als den
+Frauen zugestanden ($p<0.001$). Diese Differenz im Geschlechtereffekt nach
+Zivilstand ist signifikant mit einem $p$-Wert von 0.017. Die Resultate passen
+gut zur Hypothese, dass es vom Familienkontext abhängt, ob ein Unterschied
+zwischen den Geschlechtern gemacht wird. Alleinstehende Frauen ohne Kinder
+werden nicht benachteiligt, verheiratete Frauen aber schon. Allerdings scheint
+die Vermutung, dass das Einkommen des Partners bei der Bewertung „dazu gedacht“
+wird, falsch zu sein, da für Frauen die Einkommensbewertungen unabhängig vom
+Zivilstand sind. Vielmehr ist der Unterschied bei den Männern: Verheiratete
+Männer sollen gemäss Einschätzung der Befragten etwa 300 Franken mehr Einkommen
+erhalten als alleinstehende Männer. Dies steht in Einklang mit dem
+traditionellen Rollenbild des Mannes als Haupternährer.
+
+\begin{figure}[p]\centering
+    \includegraphics[scale=.9]{log/ex3}
+    \caption{Einkommensbewertungen nach Geschlecht der beschriebenen Person in 
+    Experiment 3 (Mittelwerte inkl. 95\%-Konfidenzintervalle)}\label{fig-ex3}
+\end{figure}
+
+\begin{figure}[p]\centering
+    \includegraphics[scale=.9]{log/ex3chf}
+    \caption{Einkommensbewertungen in CHF nach Geschlecht der beschriebenen Person in 
+    Experiment 3 (Mittelwerte inkl. 95\%-Konfidenzintervalle)}\label{fig-ex3chf}
+\end{figure}
+
+Diverse Studien mit nicht experimentellen Daten zeigen, dass verheiratete
+Männer im Durchschnitt mehr verdienen als alleinstehende
+\citep{Budig-Lim-2016,Killewald-Gough-2013}. Gemäss Beckers
+(\citeyear{Becker-1981}) Spezialisierungs-Hypothese liegt der Grund darin, dass
+es ökonomisch sinnvoll sei, wenn sich verheiratete Männer auf die Erwerbsarbeit
+konzentrieren und sich Frauen aufgrund des komparativen Vorteils bezüglich des
+Kinderkriegens auf die Haus- und Familienarbeit spezialisieren. Diese These ist
+allerdings sehr umstritten. Die Untersuchungen von \citet{Ludwig-Bruederl-2011}
+und \citet{Jakobsson-Kotsadam-2016} zeigen etwa, dass ein Selektionseffekt
+vorliegt, nach dem Männer mit höherem Einkommenspotenzial öfter heiraten. Die
+„Heiratsprämie“ der Männer könnte ein Artefakt dieser Selektion sein.
+Alternativ wird vermutet, dass von Seiten der Arbeitgeber"-Innen eine positive
+Diskriminierung stattfinden könnte in dem Sinne, dass diese bereit sind,
+verheirateten Männern aufgrund von traditionellem Rollendenken (Mann
+als Haupternährer) mehr Lohn zu bezahlen (\citealp{Budig-Lim-2016}; vgl. auch
+\citealp{Killewald-Gough-2013}).
+
+Dass der Zivilstand einen Einfluss auf die Einkommensbewertung hat, belegt auch
+andere experimentelle Forschung. Die Untersuchungen von \citet{Gatskova-2015} und 
+\citet{Sauer-etal-2009} zeigen, dass das Einkommen von Vignetten-Personen, welche mit
+einer nichterwerbstätigen Person verheiratet sind, von den Versuchspersonen
+jeweils als zu tief beurteilt wird. Allerdings bleibt in diesen beiden
+Experimenten unklar, ob dies für Frauen und Männer gleichermassen gilt. 
+\citet{Shamon-Duelmer-2014} diskutieren diesen Aspekt und leiten daraus die Hypothese ab,
+dass den Männern aufgrund der geschlechtsspezifischen Arbeitsteilung ein
+höheres Einkommen zugestanden wird als den Frauen \citep[348]{Shamon-Duelmer-2014}.
+In den Vignetten halten sie, ähnlich unserem Experiment 2, den Zivilstand
+konstant. Die beschriebenen Frauen und Männer sind alle mit einer
+nichterwerbstätigen Person verheiratet. Ihre Ergebnisse zeigen aber gerade das
+Gegenteil der postulierten Hypothese: Die Einkommen der Frauen werden als zu
+tief bewertet und nicht diejenigen der Männer. \comment{Da könnte auch ein
+„Kompensations-Effekt“ eine Rolle spielen, denn dass in verheirateten Paaren
+nur die Frau erwerbstätig ist, ist ungewöhnlich und hat vermutlich meist
+gewichtige Gründe (z.B. Arbeitslosigkeit oder Krankheit des Mannes).}
+
+Unsere Ergebnisse aus Experiment 3 haben gezeigt, dass Geschlecht und
+Zivilstand einen Einfluss darauf haben, wie das Einkommen bewertet wird. Der
+Einfluss des Zivilstands ist aber geschlechtsspezifisch: Verheirateten Männern
+wird ein höheres Einkommen zugestanden, bei Frauen gibt es keinen Unterschied.
+Wir vermuten daher, dass neben der Spezialisierungs-These und dem
+Selektionseffekt auch noch eine unterschiedliche Behandlung von verheirateten
+Frauen und Männern die empirisch bereits vielfach festgestellte Heiratsprämie
+verursachen könnte.
+
+\subsection{Effekte von Personenmerkmalen auf den “Just Wage Gap”}
+
+In den bisherigen Analysen haben wir jeweils geprüft, ob das Geschlecht der
+Versuchsperson einen Einfluss darauf hat, inwieweit das Einkommen von Frauen
+und Männern unterschiedliche bewertet wird. In allen drei Experimenten fanden
+sich keine Hinweise auf einen solchen Effekt. Dies steht in Einklang mit der
+„reward expectations theory“ von \citet{Auspurg-etal-2017}. In
+Tabelle~\ref{tab-4} sind die Resultate nochmals zusammengetragen. Zudem gibt
+die Tabelle Aufschluss über die Effekte einiger weiterer Personenmerkmale.
+Dargestellt ist jeweils der totale Effekt des entsprechenden Personenmerkmals
+auf den Unterschied in der Bewertung des Einkommens von Frauen und Männern
+(also ohne Kontrolle der anderen Personenmerkmale). Anzumerken ist, dass es
+sich hierbei um explorative Analysen handelt, denen kein experimentelles Design
+zugrunde liegt (d.h., wenn ein Unterschied gefunden wird, heisst das nicht
+zwingen, dass der Unterschied ursächlich auf das entsprechende Personenmerkmal
+zurückzuführen ist; der Zusammenhang könnte auch durch eine nicht beobachtete
+Drittvariable erzeugt worden sein).
+
+
+\begin{table}
+    \caption{Effekte von Personenmerkmalen auf den “Just Wage Gap”}\label{tab-4}
+    \small
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}l*{3}{D{.}{.}{2.3}c}@{}}
+    \toprule
+                                  &\multicolumn{2}{c}{Experiment 1}&\multicolumn{2}{c}{Experiment 2}&\multicolumn{2}{c}{Experiment 3}     \\
+                                  \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+                                  &\multicolumn{1}{c@{}}{Effekt}&$N$
+                                  &\multicolumn{1}{c@{}}{Effekt}&$N$
+                                  &\multicolumn{1}{c@{}}{Effekt}&$N$\\
+    \expandableinput log/tab4.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\footnotesize 
+    Standardfehler in Klammern; \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\) (zweiseitig)
+\end{table}
+
+Aufgrund der zunehmenden Gleichstellungsbestrebungen im Zuge des
+Modernisierungsprozesses über die letzten 50 Jahre könnte man von einem über
+die Geburtskohorten vermittelten Wertwandel ausgehen. Dies liesse einen
+entsprechenden Effekt des Alters der Versuchspersonen vermuten. Tatsächlich ist
+er Alterseffekt in allen drei Experimenten positiv, das heisst, ältere Personen
+machen in ihren Bewertungen tendenziell einen etwas grösseren Unterschied
+zwischen Frauen und Männern, der Effekt ist jedoch nur schwach ausgeprägt und in
+keinem der Experimente signifikant ($p$-Werte von 0.35, 0.84, und 0.12). Eine
+weitere Hypothese wäre, dass über Bildung vermittelte Aufklärung zu einer
+Reduktion der geschlechtsspezifischen Unterschiede in den Bewertungen führt. In
+Übereinstimmung mit dieser Hypothese ist der Bildungseffekt in allen drei
+Experimenten negativ, und in zwei Experimenten ist der Effekt auch statistisch
+signifikant ($p$-Werte von 0.013, 0.042, und 0.18). Bezüglich des Einkommens
+der Versuchsperson (äquivalenzskaliertes Haushaltseinkommen) zeigt sich zwar
+ein Ankereffekt (das heisst, Personen mit hohem Einkommen bewerten das
+Einkommen in der Vignette eher als zu tief), der “Just Wage Gap” scheint jedoch
+nicht mit dem Einkommen zusammenzuhängen. Als letzten Faktor prüfen wir den
+Einfluss der politischen Einstellung der Versuchspersonen. Aufgrund der
+stärkeren Orientierung an traditionellen Rollenbildern könnte vermutet werden,
+dass politisch eher rechts eingestellte Personen einen grösseren
+geschlechtsspezifischen Unterschied in den Einkommensbewertungen machen. Der
+Effekt kann nur in den ersten beiden Experimenten ermittelt werden, da in der
+dritten Studie die politische Orientierung nicht erhoben wurde. In beiden
+Experimenten ist der Effekt erwartungsgemäss positiv, jedoch nur im ersten
+Experiment statistisch signifikant ($p$-Werte von 0.031 und 0.57).
+
+Insgesamt finden wir in diesen explorativen Analysen nur schwache Hinweise, dass
+substanzielle systematische Einflüsse von Personenmerkmalen auf den “Just Wage Gap” bestehen.
+
+\section{Diskussion und Schlussfolgerungen}
+
+In den drei präsentierten Experimenten ging es darum, Mechanismen aufzudecken, die
+potenziell für denjenigen Teil der Lohnlücke zwischen Frauen und Männern
+verantwortlich sein können, der sich mit herkömmlichen statistischen Analysen
+nur schlecht analysieren lässt (meist „unerklärter Anteil“ oder
+„Diskriminierungseffekt“ genannt). In Experiment 1 zeigten wir, dass die
+Einkommen von identischen Frauen und Männern ungleich bewertet werden. Im
+Umkehrschluss bedeutet dies, dass die Befragten tiefere Frauenlöhne als
+gerechtfertigt einschätzten. Der Zivilstand aller beschriebenen Personen war
+entweder verheiratet oder alleinerziehend. Niemand wurde als ledig und
+alleinstehend beschrieben. Wir führten deshalb ein zweites Experiment durch, in
+dem wir den Zivilstand konstant hielten und alle Vignetten-Personen als
+alleinstehend und ohne Kinder beschrieben. In diesem Experiment konnten wir
+keinen Geschlechtereffekt mehr feststellen. Alleinstehende Frauen werden also
+gegenüber alleinstehenden Männern nicht benachteiligt. Das im ersten Experiment
+beschriebene Bedürftigkeitskriterium enthielt zwei Dimensionen, die familiäre
+und die finanzielle Situation. Um dies auseinanderzuhalten führten wir ein
+drittes Experiment durch, in dem wir explizit den Einfluss des Zivilstands
+testen wollten. Unsere Hypothese diesbezüglich wurde weitgehend bestätigt: Es
+gibt eine Heiratsprämie für Männer. Ihnen wird im Gegensatz zu alleinstehenden
+Männern und zu Frauen, bei denen der Zivilstand keinen Einfluss hat, ein
+höheres Einkommen zugestanden.
+
+Weiter haben wir untersucht, welche Rolle die Prinzipien der
+Verteilungsgerechtigkeit in Kombination mit dem askriptiven Merkmal des
+Geschlechts bei der Einkommensbewertung spielen. Wie diese Aspekte
+zusammenhängen wurde bisher kaum erforscht. Die meisten theoretischen
+Diskussionen erwähnen zwar, dass nebst den drei Kriterien Gleichheit, Verdienst
+und Bedürftigkeit auch askriptive Merkmale eine Rolle spielen können, sagen
+aber weder weshalb, noch wie dies mit den jeweils diskutierten
+Gerechtigkeitsprinzipien vereinbar ist (oder eben nicht). Ähnlich verhält es
+sich in den empirischen Untersuchungen, die die verschiedenen Kriterien
+weitgehend separat testen. Die beiden Konzepte der Verteilungsgerechtigkeit,
+Verdienst und Bedürftigkeit, sind aber aus einer gendersensiblen Perspektive
+problematisch: Das Verdienst-Kriterium berücksichtigt nicht, dass Frauen und
+Männer unterschiedliche Voraussetzungen haben können, die gleiche Leistung zu
+erbringen. Der Umstand, dass Frauen neben der Erwerbsarbeit oft auch noch die
+Hauptverantwortung für Haushalt und Kinder tragen, hat einen Einfluss auf ihre
+Verfügbarkeit auf dem Arbeitsmarkt. Dies zeigt sich vor allem in der unter
+Frauen weit verbreiteten Teilzeitarbeit. Hingegen ist davon auszugehen, dass
+sich die effektiv geleistete Arbeit in der Qualität nicht von der Arbeit der
+Männer unterscheidet. Es kommt also darauf an, woran der Verdienst geknüpft
+wird. In Betriebskulturen, in denen der sogenannte „Präsentismus“ hoch
+geschätzt wird, haben Frauen, welche um 17 Uhr ihre Kinder von der Krippe
+abholen müssen, einen klaren Nachteil im „Wettbewerb“ darum, wer abends am
+Arbeitsplatz zuletzt das Licht löscht (vgl. \citealp{Goldin-2014}). Gerade für
+den beruflichen Aufstieg sind lange Präsenzzeiten und hohe Flexibilität immer
+noch sehr wichtig. Aufgrund der nach wie vor relativ traditionellen
+Rollenteilung, bei der die Männer mehr zum Haushaltseinkommen beitragen und die
+Frauen den grösseren Teil der Hausarbeit und Kindererziehung erledigen, ist
+auch das Bedürftigkeitsprinzip asymmetrisch. Dieser Tatsache wird weder in den
+theoretischen Diskussionen noch in ihrer empirischen Anwendung genügend
+Rechnung getragen. Mit dem dritten Experiment haben wir in diesem Punkt
+versucht einen Beitrag zu leisten und haben gezeigt, wie der Zivilstand, sofern
+dieser tatsächlich ein sinnvoller Proxy für Bedürftigkeit ist, für Frauen und
+Männer im Zusammenhang mit der Beurteilung eines gerechten Einkommens eine
+unterschiedliche Bedeutung hat.
+
+
+% References
+
+\begin{small}
+\bibliographystyle{asr_de}
+\bibliography{bib}
+\end{small}
+
+% Appendix
+
+\begin{table}
+    \caption{Durchschnittliche Einkommensbewertung nach experimentellen Faktoren}\label{tab-A1}
+    \small
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lD{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{3.0}D{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{3.0}D{.}{.}{2.2}D{.}{.}{1.2}@{}}
+    \toprule
+                                  &\multicolumn{3}{c}{Frauen}            &\multicolumn{3}{c}{Männer}            &\multicolumn{2}{c}{Differenz}     \\
+                                  \cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(l){8-9}
+                                  &\multicolumn{1}{c@{}}{$\overline{Y}$}&\multicolumn{1}{c@{}}{$\hat\sigma$}&N
+                                  &\multicolumn{1}{c@{}}{$\overline{Y}$}&\multicolumn{1}{c@{}}{$\hat\sigma$}&N
+                                  &\multicolumn{1}{c@{}}{$\Delta$}&\multicolumn{1}{c@{}}{$\hat\sigma$}\\
+    \expandableinput log/tabA1.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\footnotesize 
+    Abhängige Variable: Einkommensbewertung (--5 = „viel zu niedrig“ bis 5 =
+    „viel zu hoch“); $\overline{Y}$: Mittelwert;
+    $\hat\sigma$: Standardfehler; Differenz $\Delta$: \sym{+} \(p<0.1\),
+    \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\) (zweiseitig)
+\end{table}
+
+\begin{table}
+    \caption{Deskriptive Statistiken der Stichproben}\label{tab-A2}
+    \small
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}l*{3}{D{.}{.}{5.2}D{.}{.}{4.3}}@{}}
+    \toprule
+                                  &\multicolumn{2}{c}{Experiment 1} &\multicolumn{2}{c}{Experiment 2} &\multicolumn{2}{c}{Experiment 3}\\
+                                  \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+                                  &\multicolumn{1}{c@{}}{$\overline{X}$}&\multicolumn{1}{c@{}}{$\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\overline{X}$}&\multicolumn{1}{c@{}}{$\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\overline{X}$}&\multicolumn{1}{c@{}}{$\sigma$}\\
+    \expandableinput log/tabA2.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\footnotesize 
+    $\overline{X}$: Mittelwert bzw. Prozentanteil; $\sigma$: Standardabweichung;
+    Einkommen: Haushaltsäquivalenzeinkommen bei Experiment 1 und 3, persönliches Einkommen bei Experiment 2;
+    politische Orientierung: 1 = ganz links, 10 = ganz rechts
+\end{table}
+
+\begin{table}
+    \caption{Tabelle zu Abbildung \ref{fig-ex1}}\label{tab-ex1}
+    \small
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lD{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}@{}}
+    \toprule
+                                  &\multicolumn{2}{c}{Frauen}            &\multicolumn{2}{c}{Männer}            &\multicolumn{2}{c}{Differenz}     \\
+                                  \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\Delta$}&\multicolumn{1}{c@{}}{$\hat\sigma$}\\
+    \expandableinput log/tab1.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\footnotesize 
+    Abhängige Variable: Einkommensbewertung (--5 = „viel zu niedrig“ bis 5 =
+    „viel zu hoch“);
+    $\widehat E(Y)$: Durchschnittliche Bewertung; $\Delta$: Differenz zwischen Frauen und Männern;
+    $\hat\sigma$: Standardfehler\newline
+    Differenztests: \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\) (zweiseitig)
+\end{table}
+
+\begin{table}
+    \caption{Tabelle zu Abbildung \ref{fig-ex2}}\label{tab-ex2}
+    \small
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lD{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}@{}}
+    \toprule
+                                  &\multicolumn{2}{c}{Frauen}            &\multicolumn{2}{c}{Männer}            &\multicolumn{2}{c}{Differenz}     \\
+                                  \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\Delta$}&\multicolumn{1}{c@{}}{$\hat\sigma$}\\
+    \expandableinput log/tab2.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\footnotesize 
+    Abhängige Variable: Einkommensbewertung (--5 = „viel zu niedrig“ bis 5 =
+    „viel zu hoch“);
+    $\widehat E(Y)$: Durchschnittliche Bewertung; $\Delta$: Differenz zwischen Frauen und Männern;
+    $\hat\sigma$: Standardfehler\newline
+    Differenztests: \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\) (zweiseitig)
+\end{table}
+
+\begin{table}
+    \caption{Tabelle zu Abbildung \ref{fig-ex2chf}}\label{tab-ex2chf}
+    \small
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lD{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}@{}}
+    \toprule
+                                  &\multicolumn{2}{c}{Frauen}            &\multicolumn{2}{c}{Männer}            &\multicolumn{2}{c}{Differenz}     \\
+                                  \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\Delta$}&\multicolumn{1}{c@{}}{$\hat\sigma$}\\
+    \expandableinput log/tab2chf.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\footnotesize 
+    Abhängige Variable: Einkommensbewertung (--5 = „viel zu niedrig“ bis 5 =
+    „viel zu hoch“); Resultate umgerechnet zu CHF;
+    $\widehat E(Y)$: Durchschnittliche Bewertung; $\Delta$: Differenz zwischen Frauen und Männern;
+    $\hat\sigma$: Standardfehler\newline
+    Differenztests: \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\) (zweiseitig)
+\end{table}
+
+\begin{table}
+    \caption{Tabelle zu Abbildung \ref{fig-ex3}}\label{tab-ex3}
+    \small
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lD{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}D{.}{.}{2.2}D{.}{.}{1.2}@{}}
+    \toprule
+                                  &\multicolumn{2}{c}{Frauen}            &\multicolumn{2}{c}{Männer}            &\multicolumn{2}{c}{Differenz}     \\
+                                  \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\Delta$}&\multicolumn{1}{c@{}}{$\hat\sigma$}\\
+    \expandableinput log/tab3.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\noindent\footnotesize 
+    Abhängige Variable: Einkommensbewertung (--5 = „viel zu niedrig“ bis 5 =
+    „viel zu hoch“);
+    $\widehat E(Y)$: Durchschnittliche Bewertung; $\Delta$: Differenz zwischen Frauen und Männern;
+    $\hat\sigma$: Standardfehler\newline
+    Differenztests: \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\) (zweiseitig)
+\end{table}
+
+\begin{table}
+    \caption{Tabelle zu Abbildung \ref{fig-ex3chf}}\label{tab-ex3chf}
+    \small
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lD{.}{.}{4.1}D{.}{.}{3.1}D{.}{.}{4.1}D{.}{.}{3.1}D{.}{.}{3.1}D{.}{.}{3.1}@{}}
+    \toprule
+                                  &\multicolumn{2}{c}{Frauen}            &\multicolumn{2}{c}{Männer}            &\multicolumn{2}{c}{Differenz}     \\
+                                  \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\widehat E(Y)$}&\multicolumn{1}{c@{}}{$\hat\sigma$}
+                                  &\multicolumn{1}{c@{}}{$\Delta$}&\multicolumn{1}{c@{}}{$\hat\sigma$}\\
+    \expandableinput log/tab3chf.tex
+    \bottomrule
+    \end{tabular*}
+    \par\medskip\footnotesize 
+    Abhängige Variable: Einkommensbewertung (--5 = „viel zu niedrig“ bis 5 =
+    „viel zu hoch“); Resultate umgerechnet zu CHF;
+    $\widehat E(Y)$: Durchschnittliche Bewertung; $\Delta$: Differenz zwischen Frauen und Männern;
+    $\hat\sigma$: Standardfehler\newline
+    Differenztests: \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\) (zweiseitig)
+\end{table}
+
+
+
+
+
+\end{document}
+
+
